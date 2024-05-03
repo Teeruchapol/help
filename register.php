@@ -22,17 +22,14 @@ include('server.php')
                 <h2 class="font-bold text-2xl text-[#901B2D]">สมัคร</h2>
                 <p class="text-sm mt-4 text-[#901B2D]"">สมัครบัญชีผู้ใช้ห้อง</p>
                 <br>
-                <!-- gender -->
-                <label class=" mt-8 text-[#901B2D] p-2">คำนำหน้า :</label>
-                    <select id="prefix" name="prefix">
-                        <option value="#">กรุณาเลือก</option>
-                        <option value="Mr">นาย</option>
-                        <option value="Miss">นางสาว</option>
-                        <option value="">ไม่ระบุ</option>
-                    </select>
-                    <!-- gender END -->
-                    
-                    <form action="register_db.php" method="post" class="flex flex-col gap-4">
+                
+
+
+
+
+                                    <!-- form -->
+                
+                <form action="register_db.php" method="post" class="flex flex-col gap-4">
                         <?php include('error.php') ; ?>
                         <?php if(isset($_SESSION['error'])) : ?>
                             <div class="error">
@@ -44,11 +41,23 @@ include('server.php')
                               </h3>
                             </div>
                             <?php endif ?>
+                    <div>
+                        <label class=" mt-8 text-[#901B2D] p-2">เลือกคำนำหน้า :</label>
+                        <select id="prefix" name="prefix">
+                        <option value="">กรุณาเลือก</option>
+                        <option value="นาย">นาย</option>
+                        <option value="นาง">นาง</option>
+                        <option value="ไม่ระบุ">ไม่ระบุ</option>
+                    </select>
+                          </div>
+                
+                    <!-- gender END --> 
+                    
 
                         <!-- input name -->
                         <div class="flex gap-3">
-                            <input class="p-2 mt-8 border" type="text" name="frist_Name" placeholder="ชื่อ">
-                            <input class="p-2 mt-8 border" type="text" name="last_Name" placeholder="นามสกุล">
+                            <input class="p-2 mt-8 border" type="text" name="first_name" placeholder="ชื่อ">
+                            <input class="p-2 mt-8 border" type="text" name="last_name" placeholder="นามสกุล">
                         </div>
                         <!-- input name END -->
 
@@ -57,12 +66,13 @@ include('server.php')
                         <!-- input BD END -->
 
                         <!-- input gender -->
-                        <div> 
-                            <input type="checkbox" id="gender name="gender" checked />
-                            <label for="male">ชาย</label>
-                            
-                            <input type="checkbox" id="gender" name="gender" />
-                            <label for="female">หญิง</label>
+                        <div>
+                            <label class=" mt-8 text-[#901B2D] p-2">เพศ :</label>
+                    <select id="gender" name="gender">
+                        <option value="">กรุณาเลือก</option>
+                        <option value="ชาย">ชาย</option>
+                        <option value="หญิง">หญิง</option>
+                        </select>
                           </div>
                         <!-- input gender END -->
 
@@ -77,17 +87,17 @@ include('server.php')
                           <div>
                             <label class=" mt-8 text-[#901B2D] p-2">อาชีพ :</label>
                     <select id="jobs" name="jobs">
-                        <option value="#">กรุณาเลือก</option>
-                        <option value="student">นักศึกษา</option>
-                        <option value="personnel">บุคลากร</option>
-                        <option value="teacher">อาจารย์</option>
+                        <option value="">กรุณาเลือก</option>
+                        <option value="นักศึกษา">นักศึกษา</option>
+                        <option value="บุคลากร">บุคลากร</option>
+                        <option value=">อาจารย์">อาจารย์</option>
                     </select>
                           </div>
                           <!-- job end -->
 
                           <!-- username and pw -->
                           <input class="p-2 border" type="text" name="username" placeholder="สร้างชื่อผู้ใช้">
-                          <input class="p-2 border" type="password" name="password" placeholder="สรา้งรหัสผ่าน">
+                          <input class="p-2 border" type="password" name="password" placeholder="สร้างรหัสผ่าน">
                           <br>
                           <!-- username and pw END -->
 

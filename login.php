@@ -1,4 +1,7 @@
-<?php include('server.php') ?>
+<?php
+session_start(); 
+include('server.php') 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,10 +21,22 @@
                 <h2 class="font-bold text-2xl text-[#901B2D]">ล็อคอิน</h2>
                 <p class="text-sm mt-4 text-[#901B2D]"">ล็อคอิน.</p>
 
-                    <form action=" "class=" flex flex-col gap-4">
+                    <form action=" login_db.php"class="  flex flex-col gap-4" method="post">
+                    <?php if (isset($_SESSION['error'])) : ?>
+                    <div class="error">
+                        <h3>
+                            <?php
+                            echo $_SESSION['error'];
+                            unset($_SESSION['error']);
+                            ?>
+                        </h3>
+                    </div>
+                    <?php endif ?>
+
                     <input class="p-2 mt-8 rounded-x1 border " type="text" name="username" placeholder="ชื่อผู้ใช้">
-                    <input class="p-2 rounded-x1 border"  type="password" name="password" placeholder="รหัส">
-                    <button type="submit" name="login_user" class="bg-[#901B2D] rounded-xl text-white py-2">ล็อคอิน</button>
+                    <input class="p-2 rounded-x1 border" type="password" name="password" placeholder="รหัส">
+                    <button type="submit" name="login_user"
+                        class="bg-[#901B2D] rounded-xl text-white py-2">ล็อคอิน</button>
                     </form>
 
                     <div class="mt-10 grid grid-cols-3 items-center text-gray-400">
@@ -38,8 +53,7 @@
             </div>
             <!-- img -->
             <div class="sm:block hidden w-1/2">
-                <img class="rounded-2xl"
-                    src="aw_eng_logo-01.png" alt="">
+                <img class="rounded-2xl" src="aw_eng_logo-01.png" alt="">
 
             </div>
         </div>

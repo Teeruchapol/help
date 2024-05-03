@@ -208,3 +208,9 @@ nav {
 .room__content p {
   color: var(--text-light);
 }
+
+.container1{
+  margin-right: auto;
+    margin-left: auto;
+    max-width: 900px;
+}

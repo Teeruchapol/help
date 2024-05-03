@@ -1,5 +1,6 @@
 <?php
   session_start();
+  include('server.php');
 
   if (!isset($_SESSION['username'])){
     $_SESSION['msg'] = "กรุณาเข้าสู่ระบบ";
@@ -13,7 +14,10 @@
     header("Location: login.php");
 
   }
-
+  $sql = "SELECT * FROM rooms";
+  $result = $conn->query($sql);
+  $sql = "SELECT * FROM img";
+  $img = $conn->query($sql);
 
 ?>
 
@@ -31,36 +35,38 @@
 
 <body>
   <!-- notification -->
-  <div class="error">
-  <?php if (isset($_SESSION['success'])) : ?>
-    <h3>
-      <?php
-      echo $_SESSION['success'];
-      unset($_SESSION['success']);
-      ?>
-    </h3>
-    <?php endif ?>
-    </div>
+
+
 
   <!-- logo -->
   <nav>
     <div class="nav__logo">ระบบจองห้องเรียน | IE</div>
-      <ul class="nav__links">
-        <li class="link"><a href="index.html">Home</a></li>
-        <li class="link"><a href="#">Statu Rooms</a></li>
-        <li class="link"><a href="#">History</a></li>
-        <li><a href="index.php?logout='1'" style="color: red;">Logout</a></li>
-        
-      </ul>
+    <ul class="nav__links">
+      <li class="link"><a href="index.html">Home</a></li>
+      <li class="link"><a href="#">Statu Rooms</a></li>
+      <li class="link"><a href="#">History</a></li>
+      <li><a href="index.php?logout='1'" style="color: red;">Logout</a></li>
+
+    </ul>
   </nav>
   <!-- logo end -->
 
   <!-- header -->
   <header class="section__container header__container">
+    <?php if (isset($_SESSION['success'])) : ?>
+    <div class="success">
+      <h3>
+        <?php
+      echo $_SESSION['success'];
+      unset($_SESSION['success']);
+      ?>
+      </h3>
+    </div>
+    <?php endif ?>
     <div class="header__image__container">
       <div class="header__content">
         <h1>ยินดีต้อนรับ</h1>
-        <p>กรุณาเลือกห้องเรียนที่ประสงค์จะจทำการจอง</p>
+        <p>กรุณาเลือกห้องเรียนที่ประสงค์จะทำการจอง</p>
       </div>
 
   </header>
@@ -68,104 +74,31 @@
 
   <!-- room card -->
   <section class="section__container popular__container">
+      
     <h2 class="section__header">ห้องเรียน | ประชุม</h2>
+    
     <div class="room__grid">
-      <div class="room__card">
-        <a href=""><img src="aw_eng_secondary_icon-03.png" alt="room" /></a>
-        <div class="room__content">
-          <div class="room__card__header">
-            <h4>ห้อง</h4>
-          </div>
-          <p>.......</p>
-        </div>
+      
+    <?php while($row = $result->fetch_assoc()): ?>
+  <?php $row1 = $img->fetch_assoc(); ?>
+  <div class="room__card">  
+    <a href="page.php"><img src="<?php echo $row1['img_dir']; ?>" /></a>
+    <div class="room__content">
+      <div class="room__card__header">
+        <a href="page.php""><h4><?php echo $row['nameroom']; ?></h4></a>
       </div>
-      <div class="room__card">
-        <a href=""><img src="aw_eng_secondary_icon-03.png" alt="room" /></a>
-        <div class="room__content">
-          <div class="room__card__header">
-            <h4>ห้อง</h4>
-
-          </div>
-          <p>......</p>
-        </div>
-      </div>
-      <div class="room__card">
-        <a href=""><img src="aw_eng_secondary_icon-03.png" alt="room" /></a>
-        <div class="room__content">
-          <div class="room__card__header">
-            <h4>ห้อง</h4>
-
-          </div>
-          <p>.....</p>
-        </div>
-      </div>
-      <div class="room__card">
-        <a href=""><img src="aw_eng_secondary_icon-03.png" alt="room" /></a>
-        <div class="room__content">
-          <div class="room__card__header">
-            <h4>ห้อง</h4>
-
-          </div>
-          <p>.....</p>
-        </div>
-      </div>
-      <div class="room__card">
-        <a href=""><img src="aw_eng_secondary_icon-03.png" alt="room" /></a>
-        <div class="room__content">
-          <div class="room__card__header">
-            <h4>ห้อง</h4>
-
-          </div>
-          <p>....</p>
-        </div>
-      </div>
-      <div class="room__card">
-        <a href=""><img src="aw_eng_secondary_icon-03.png" alt="room" /></a>
-        <div class="room__content">
-          <div class="room__card__header">
-            <h1>ห้อง</h1>
-
-          </div>
-          <p>....</p>
-        </div>
-      </div>
-
-      <div class="room__card">
-        <a href=""><img src="aw_eng_secondary_icon-03.png" alt="room" /></a>
-        <div class="room__content">
-          <div class="room__card__header">
-            <h4>ห้อง</h4>
-          </div>
-          <p>.......</p>
-        </div>
-      </div>
-
-      <div class="room__card">
-        <a href=""><img src="aw_eng_secondary_icon-03.png" alt="room" /></a>
-        <div class="room__content">
-          <div class="room__card__header">
-            <h4>ห้อง</h4>
-          </div>
-          <p>.......</p>
-        </div>
-      </div>
-
-      <div class="room__card">
-        <a href=""><img src="aw_eng_secondary_icon-03.png" alt="room" /></a>
-        <div class="room__content">
-          <div class=roomr__card__header">
-            <h4>ห้อง</h4>
-          </div>
-          <p>.......</p>
-        </div>
-      </div>
+      <p><?php echo $row['cap']; ?></p>
+    </div>
+  </div>
+<?php endwhile ?>
 
     </div>
+  
   </section>
   <!-- room card end -->
   <!-- connect -->
   <!-- end conncet -->
-    
+
 
 </body>
 

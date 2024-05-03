@@ -1,11 +1,8 @@
-// date picker
-mobiscroll.datepicker('#date-picker', {
-    controls: ['date'],
-    touchUi: true
-});
+import Datepicker from 'flowbite-datepicker/Datepicker';
+import 'flowbite-datepicker';
+import 'flowbite/dist/datepicker.turbo.js';
 
-// time picker
-mobiscroll.datepicker('#time-picker', {
-    controls: ['time'],
-    touchUi: true
-});
+const datepickerEl = document.getElementById('datepickerId');
+new Datepicker(datepickerEl, { 
+    // optionsa
+}); 
